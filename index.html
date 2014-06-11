@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="cross_domain_ajax.js"></script>
+    <script type="text/javascript" src="upload.js"></script>
+  </head>
+  <body>
+    <iframe src="#" style ="width: 0; height: 0; border: 0px solid #fff;" name="upload_target", id="upload_target"></iframe>
+    <span id="percentage"></span>
+    <form enctype="multipart/form-data" action="http://localhost:2000/upload.cgi" method="POST" id="form" target="upload_target">
+      <p><label>Select a file:</label></p>
+      <p><input type="file" id="file" name="file" size="100" /></p>
+      <p><input type="button" onclick="sendFile()" value="Upload" /></p>
+    </form>    
+  </body>
+</html>
