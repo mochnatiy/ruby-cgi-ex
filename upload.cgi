@@ -2,7 +2,7 @@
  
 require 'cgi'
 
-CHUNK_SIZE = 61440
+CHUNK_SIZE = 102400
 
 cgi = CGI.new
 params = cgi.params
@@ -17,7 +17,7 @@ if params.has_key? 'file'
     while buffer = io.read(CHUNK_SIZE)
       offset += CHUNK_SIZE
       f << buffer
-      cgi.out('text/plain') { ((offset.to_f / size.to_f) * 100).to_i.to_s }
+      cgi.out('text/plain') { ((offset.to_f / size.to_f) * 100).to_i.to_s } # Worked synchronously :(
     end
   end
 end
