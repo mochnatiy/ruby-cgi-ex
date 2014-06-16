@@ -1,7 +1,7 @@
 // 'AJAX' file upload and check progress
 
 function finishUpload() {
-  ajax('GET', 'http://localhost:2000/upload.cgi?finish=true');
+  ajax('GET', 'http://localhost:2000/upload.cgi?finish=true', null);
 }
 
 function checkProgress() {
@@ -42,18 +42,19 @@ function createXMLHTTPRequest() {
     return XMLHTTP;
 }
 
-function ajax(type, url) {
+function ajax(type, url, data) {
   var XMLHTTP = createXMLHTTPRequest();
   var response = '';
   
   if (XMLHTTP.readyState == 4 || XMLHTTP.readyState == 0) {
     XMLHTTP.open(type, url, true);
+    XMLHTTP.setRequestHeader('Access-Control-Allow-Origin', '*'); // Test in chrome
+    XMLHTTP.send(data);
     XMLHTTP.onreadystatechange = function() {
       if (XMLHTTP.readyState == 4 && XMLHTTP.status == 200) {
         response = XMLHTTP.responseText;
       } 
     }
-    XMLHTTP.send(null);
     return response;
   }
   else
