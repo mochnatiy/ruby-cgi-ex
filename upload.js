@@ -1,7 +1,7 @@
 // 'AJAX' file upload and check progress
 
 function finishUpload() {
-  ajax('GET', 'http://localhost:2000/upload.cgi?finish=true', null);
+  ajax('GET', 'http://localhost:2000/upload.cgi?finish=true', null); // Modify to PUT
 }
 
 function checkProgress() {

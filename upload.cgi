@@ -5,6 +5,8 @@ require 'cgi'
 CHUNK_SIZE = 102400
 
 cgi = CGI.new('html4')
+cgi.header('Access-Control-Allow-Origin' => '*')
+
 params = cgi.params
  
 if params.has_key? 'file'
