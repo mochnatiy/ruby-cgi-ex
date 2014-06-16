@@ -1,12 +1,22 @@
 // 'AJAX' file upload and check progress
+
+function finishUpload() {
+  ajax('GET', 'http://localhost:2000/upload.cgi?finish=true');
+}
+
 function checkProgress() {
-  //var percentage = ajax('GET', 'http://localhost:2000/upload.cgi?check=true');
-  var percentage = CROSS.XSS.post('http://localhost:2000/upload.cgi', 'check=true');
-  //document.getElementById('percentage').innerHTML = percentage + ' %';
+  //var percentage = CROSS.XSS.post('http://localhost:2000/upload.cgi', 'check=true');
+  var percentage = ajax('GET', 'http://localhost:2000/upload.cgi?check=true'); // TODO: Run on single server to escape cross domain request
+  if (parseInt(percentage) !== 100) {
+    document.getElementById('percentage').innerHTML = percentage;
+    setTimeout('checkProgress()', '500');
+  } else {
+    finishUpload();
+  }
 }
 
 function sendFile() {
-  //setInterval('checkProgress()', 1000);
+  checkProgress();
   document.getElementById('form').submit();
 }
 
